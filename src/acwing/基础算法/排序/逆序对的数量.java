@@ -1,4 +1,4 @@
-package acwing;
+package acwing.基础算法.排序;
 
 import java.util.Scanner;
 
