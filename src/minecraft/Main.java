@@ -22,11 +22,7 @@ public class Main {
         long currentTimeMillis2 = System.currentTimeMillis();
         System.out.println(currentTimeMillis2-currentTimeMillis);
     }
-    /**
-     * TODO:递归扫描指定文件夹下面的指定文件
-     * @return ArrayList<Object>
-     * @throws FileNotFoundException
-     */
+
     public static void scanFilesWithRecursion(String folderPath) throws FileNotFoundException {
         File directory = new File(folderPath);
         if(!directory.isDirectory()){
