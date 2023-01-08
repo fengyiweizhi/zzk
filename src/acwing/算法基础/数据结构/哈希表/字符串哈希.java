@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 /**
  * https://www.acwing.com/problem/content/843/
+ *
  * 给定一个长度为 n 的字符串，再给定 m 个询问，每个询问包含四个整数 l1,r1,l2,r2，请你判断 [l1,r1] 和 [l2,r2] 这两个区间所包含的字符串子串是否完全相同。
  *
  * 字符串中只包含大小写英文字母和数字。
