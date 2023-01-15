@@ -1,15 +1,17 @@
-package acwing.算法基础.搜索与图论.Dijkstra;
+package acwing.算法基础.搜索与图论.spfa;
 
 import java.util.Arrays;
 import java.util.PriorityQueue;
 import java.util.Scanner;
 
 /**
- * https://www.acwing.com/problem/content/852/
+ *https://www.acwing.com/problem/content/853/
  *
- * 给定一个 n 个点 m 条边的有向图，图中可能存在重边和自环，所有边权均为非负值。
+ *给定一个 n 个点 m 条边的有向图，图中可能存在重边和自环， 边权可能为负数。
  *
- * 请你求出 1 号点到 n 号点的最短距离，如果无法从 1 号点走到 n 号点，则输出 −1。
+ * 请你求出 1 号点到 n 号点的最短距离，如果无法从 1 号点走到 n 号点，则输出 impossible。
+ *
+ * 数据保证不存在负权回路。
  *
  * 输入格式
  * 第一行包含整数 n 和 m。
@@ -19,32 +21,30 @@ import java.util.Scanner;
  * 输出格式
  * 输出一个整数，表示 1 号点到 n 号点的最短距离。
  *
- * 如果路径不存在，则输出 −1。
+ * 如果路径不存在，则输出 impossible。
  *
  * 数据范围
- * 1≤n,m≤1.5×105,
- * 图中涉及边长均不小于 0，且不超过 10000。
- * 数据保证：如果最短路存在，则最短路的长度不超过 109。
+ * 1≤n,m≤105,
+ * 图中涉及边长绝对值均不超过 10000。
  *
  * 输入样例：
  * 3 3
- * 1 2 2
- * 2 3 1
+ * 1 2 5
+ * 2 3 -3
  * 1 3 4
  * 输出样例：
- * 3
- *
- *优化的
+ * 2
  * @author 风亦未止
- * @date 2023/1/12 22:21
+ * @date 2023/1/15 17:49
  */
-public class Dijkstra求最短路II {
+public class spfa求最短路 {
 
     private static int N = 150010;
     //邻接表存储
     private static int[] h = new int[N];
     private static int[] e = new int[2*N];
     private static int[] ne = new int[2*N];
+    //该点的距离
     private static int[] w = new int[2*N];
     private static int idx = 0;
 
@@ -62,28 +62,29 @@ public class Dijkstra求最短路II {
         h[a] = idx++;
     }
 
-    private static int  dijkstra(){
-        //优先队列
-        PriorityQueue<int[]> queue = new PriorityQueue<>((a,b) -> {return a[1] - b[1];});
+    private static int  spfa(){
+        //优先队列 - 什么队列都行
+        PriorityQueue<Integer> queue = new PriorityQueue<>();
         dist[1] = 0;
-        queue.add(new int[]{1,dist[1]});
-
-        //出队，每次出来都是原点到达该点距离最小的点
+        queue.add(1);
+        st[1] = true;
         while (!queue.isEmpty()){
-            int[] t = queue.poll();
-            if(st[t[0]]){
-                continue;
-            }
-            st[t[0]] = true;
-            for(int j = h[t[0]]; j != -1; j = ne[j]){
+            int t = queue.poll();
+            //出队了就不记录了
+            st[t] = false;
+            for(int j = h[t]; j != -1; j = ne[j]){
                 int nex = e[j];
-                if ( dist[nex] > t[1] + w[j]) {
-                    dist[nex] =   t[1] + w[j];
-                    queue.add(new int[]{nex,dist[nex]});
+                //用 t 点更新下一个点
+                if ( dist[nex] > dist[t] + w[j]) {
+                    dist[nex] =  dist[t] + w[j];
+                    if(!st[nex]){
+                        queue.add(nex);
+                        st[nex] = true;
+                    }
                 }
             }
         }
-        return dist[n] == N*N ? -1 : dist[n];
+        return dist[n] == N*N ? -10086 : dist[n];
     }
 
 
@@ -103,6 +104,12 @@ public class Dijkstra求最短路II {
             int c = scanner.nextInt();
             add(a, b, c);
         }
-        System.out.println(dijkstra());
+        int spfa = spfa();
+        if(spfa == -10086){
+            System.out.println("impossible");
+        }else {
+            System.out.println(spfa);
+        }
+
     }
 }
