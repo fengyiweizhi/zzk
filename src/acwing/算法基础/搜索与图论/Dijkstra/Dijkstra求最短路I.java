@@ -56,6 +56,7 @@ public class Dijkstra求最短路I {
         dist[1] = 0;
         for(int i = 0 ; i < n; i++){
             int t = -1;
+            //找最小边的点
             for(int j = 1; j <= n ; j++){
                 //找没有确定最短路的点 , 1 到 t不是最短的
                 if(!st[j] && (t == -1 || dist[t] > dist[j]) ){
