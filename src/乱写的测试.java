@@ -1,5 +1,6 @@
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Scanner;
 import java.util.Set;
 
 /**
@@ -8,9 +9,6 @@ import java.util.Set;
  */
 public class 乱写的测试 {
     public static void main(String[] args) {
-      Set<Integer> set = new HashSet<>();
-      set.add(1);
-        Iterator<Integer> iterator = set.iterator();
-
+        System.out.println((double) 2 / (double) 100);
     }
 }
