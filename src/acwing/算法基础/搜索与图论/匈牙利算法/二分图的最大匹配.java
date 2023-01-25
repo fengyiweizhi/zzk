@@ -1,5 +1,8 @@
 package acwing.算法基础.搜索与图论.匈牙利算法;
 
+import java.util.Arrays;
+import java.util.Scanner;
+
 /**
  * https://www.acwing.com/problem/content/863/
  *
@@ -41,7 +44,61 @@ package acwing.算法基础.搜索与图论.匈牙利算法;
  * @date 2023/1/20 23:26
  */
 public class 二分图的最大匹配 {
-    public static void main(String[] args) {
+    final static int N = 501;
+    final static int M = 100010;
+    //邻接表
+    private static int[] h = new int[N];
+    private static int[] e = new int[2 * M];
+    private static int[] nex = new int[2 * M];
+    private static int idx = 0;
 
+    private static boolean[] std = new boolean[N];
+    //match[右边] = 左边  做匹配
+    private static int[] match = new int[N];
+
+
+    private static void add(int u, int v) {
+        e[idx] = v;
+        nex[idx] = h[u];
+        h[u] = idx++;
     }
+
+
+    private static boolean find(int x) {
+        for(int i = h[x]; i != -1; i = nex[i]){
+            int ee = e[i];
+            if(!std[ee]){
+                std[ee] = true;
+                if(match[ee] == 0 || find(match[ee])){
+                    match[ee] = x;
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public static void main(String[] args) {
+        Arrays.fill(h, -1);
+        Scanner scanner = new Scanner(System.in);
+        int n1 = scanner.nextInt();
+        int n2 = scanner.nextInt();
+        int m = scanner.nextInt();
+        while(m -- > 0){
+            int u = scanner.nextInt();
+            int v = scanner.nextInt();
+            add(u, v);
+        }
+        int res = 0;
+        //开始为左边匹配
+        for(int i = 1 ; i <= n1; i++){
+            //初始化清空匹配
+            Arrays.fill(std, false);
+            if(find(i)){
+                res ++;
+            }
+        }
+        System.out.println(res);
+    }
+
 }
