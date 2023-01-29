@@ -9,6 +9,7 @@ import java.util.Set;
  */
 public class 乱写的测试 {
     public static void main(String[] args) {
-        System.out.println((double) 2 / (double) 100);
+
+        System.out.println(String.valueOf(new char[]{'a','b'}));
     }
 }
