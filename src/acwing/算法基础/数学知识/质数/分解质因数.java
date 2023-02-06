@@ -1,5 +1,7 @@
 package acwing.算法基础.数学知识.质数;
 
+import java.util.Scanner;
+
 /**
  * https://www.acwing.com/problem/content/869/
  *
@@ -32,4 +34,32 @@ package acwing.算法基础.数学知识.质数;
  * @date 2023/1/25 23:28
  */
 public class 分解质因数 {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        while(n -- > 0){
+            int m = scanner.nextInt();
+            divide(m);
+            System.out.println();
+        }
+    }
+
+    private static void divide(int m) {
+        //从小到大枚举数 ， 当枚举到 i 时， 已经把 2 ~ i-1 的质因子除干净了
+        // m 当中最多包含一个大于sqrt(m) 的质因子·
+        for(int i = 2; i <= m / i; i++ ){
+            if(m % i == 0){ // 成立时 i 一定是质数
+                int count = 0;
+                while(m % i == 0){
+                    m /= i;
+                    count++;
+                }
+                System.out.println(i + " " + count);
+            }
+        }
+        if(m > 1){
+            System.out.println(m + " " + 1);
+        }
+    }
 }
