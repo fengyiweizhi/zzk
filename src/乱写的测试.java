@@ -1,7 +1,5 @@
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author 风亦未止
@@ -9,7 +7,8 @@ import java.util.Set;
  */
 public class 乱写的测试 {
     public static void main(String[] args) {
-
+        Set<String> res = new HashSet<>();
+        List<String> collect = res.stream().sorted().collect(Collectors.toList());
         System.out.println(String.valueOf(new char[]{'a','b'}));
     }
 }
