@@ -1,5 +1,7 @@
 package acwing.算法基础.数学知识.欧拉函数;
 
+import java.util.Scanner;
+
 /**
  * https://www.acwing.com/problem/content/875/
  *
@@ -36,6 +38,23 @@ package acwing.算法基础.数学知识.欧拉函数;
  */
 public class 欧拉函数 {
     public static void main(String[] args) {
-
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        while(n -- > 0){
+            int m = scanner.nextInt();
+            int res = m;
+            for(int i = 2 ; i <= m / i ; i++){
+                if(m % i == 0){
+                    res = res / i * (i - 1);
+                    while(m % i == 0){
+                        m /= i;
+                    }
+                }
+            }
+            if(m > 1){
+                res = res / m * (m - 1);
+            }
+            System.out.println(res);
+        }
     }
 }
