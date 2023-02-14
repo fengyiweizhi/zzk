@@ -1,11 +1,12 @@
-import java.util.*;
-import java.util.stream.Collectors;
+package acwing.算法基础.基础算法.前缀;
 
 /**
+ * 这只是测试而已o
  * @author 风亦未止
- * @date 2023/1/4 15:55
+ * @date 2023/2/14 16:24
  */
-public class 乱写的测试 {
+public class 测试差分 {
+
     public static void main(String[] args) {
         int[] nums = new int[]{1,12,3,4,1,4};
         int[] c = new int[nums.length + 2];
