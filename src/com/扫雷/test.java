@@ -1,6 +1,5 @@
-package test;
+package com.扫雷;
 
-import java.math.BigInteger;
 import java.util.*;
 import java.util.stream.Collectors;
 

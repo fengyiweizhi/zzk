@@ -1,4 +1,4 @@
-package 反射;
+package com.反射;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

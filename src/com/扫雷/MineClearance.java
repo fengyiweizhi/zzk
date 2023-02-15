@@ -1,4 +1,4 @@
-package test;
+package com.扫雷;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,7 +22,7 @@ public class MineClearance {
 
     MineClearance(){
         /* 绘制窗口 */
-        JFrame f = new JFrame("扫雷");
+        JFrame f = new JFrame("com/扫雷");
         f.setBounds(600,200,500,600);
         f.setDefaultCloseOperation(3);
         f.setLayout(null);

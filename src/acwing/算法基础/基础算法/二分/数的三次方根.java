@@ -26,14 +26,14 @@ import java.util.Scanner;
 public class 数的三次方根 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        double nums= scanner.nextDouble();
-        double l=-10000,r=10000;
-        while(r-l>1e-8){
-            double mid=(l+r)/2;
-            if(mid*mid*mid>=nums){
-                r=mid;
+        double nums = scanner.nextDouble();
+        double l =- 10000, r = 10000;
+        while(r - l > 1e-8){
+            double mid =  (l + r ) / 2;
+            if(mid * mid * mid >= nums){
+                r = mid;
             }else {
-                l=mid;
+                l = mid;
             }
         }
         System.out.println(String.format("%.6f", r));

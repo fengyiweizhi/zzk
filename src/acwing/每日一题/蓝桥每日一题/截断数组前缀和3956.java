@@ -1,4 +1,4 @@
-package acwing.蓝桥每日一题;
+package acwing.每日一题.蓝桥每日一题;
 
 import java.util.Scanner;
 

@@ -1,7 +1,4 @@
-package lambda;
-
-import java.util.Collection;
-import java.util.Iterator;
+package com.lambda;
 
 /**
  * @author 风亦未止

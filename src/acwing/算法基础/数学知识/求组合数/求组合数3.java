@@ -1,5 +1,7 @@
 package acwing.算法基础.数学知识.求组合数;
 
+import java.util.Scanner;
+
 /**
  * https://www.acwing.com/problem/content/889/
  *
@@ -35,6 +37,47 @@ package acwing.算法基础.数学知识.求组合数;
  * @date 2023/2/15 3:37
  */
 public class 求组合数3 {
+    private static int p ;
 
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        while(n -- > 0 ){
+            long a = scanner.nextLong();
+            long b = scanner.nextLong();
+             p = scanner.nextInt();
+            System.out.println(lucas(a, b));
+        }
+    }
 
+    private static long lucas(long a, long b) {
+        if(a < p && b < p){
+            return C(a , b);
+        }
+        return C(a % p, b % p) * lucas(a / p, b / p)  % p;
+    }
+
+    //求Cab
+    private static long C(long a, long b) {
+        long res = 1;
+        for(long i = 1, j = a; i <= b; i++ , j -- ){
+            res = (res * j) % p;
+            res = res * qmi(i , p - 2) % p ;
+        }
+        return res;
+    }
+
+    private static long qmi(long a, int k) {
+        long  res = 1;
+        while(k > 0){
+            //如果k的二进制末尾是1
+            if((k & 1) == 1){
+                res = (res * a) % p;
+            }
+            //更新a ，将这次求的模平方再模给下一次(上次模的结果的平方的模)
+            a = a * a % p;
+            k >>= 1;
+        }
+        return res;
+    }
 }
