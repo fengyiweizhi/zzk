@@ -1,5 +1,7 @@
 package acwing.算法基础.数学知识.求组合数;
 
+import java.util.Scanner;
+
 /**
  * https://www.acwing.com/problem/content/891/
  *
@@ -25,9 +27,32 @@ package acwing.算法基础.数学知识.求组合数;
  */
 public class 满足条件的01序列 {
     public static void main(String[] args) {
+        //卡特兰数 C2n n / (n + 1)
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int a = 2 * n, b = n;
+        long res = 1;
+        int mod = 1000000007;
+        for(int i = a; i > a - b ; i --){
+            res = res * i % mod;
+        }
+        for(int i = 1; i <= b; i ++){
+            res = res * qmi( i , mod - 2, mod) % mod;
+        }
+        res = res * qmi(n + 1, mod - 2 ,mod) % mod;
+        System.out.println(res);
+    }
 
+    private static long qmi(long a , long k , long p){
+        long res = 1;
+        while(k > 0){
+            if((k & 1) == 1){
+                res = res * a % p;
+            }
+            a = a * a % p;
 
-
-
+            k >>= 1;
+        }
+        return res;
     }
 }
