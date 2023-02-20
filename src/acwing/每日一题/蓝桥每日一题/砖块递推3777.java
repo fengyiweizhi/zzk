@@ -1,5 +1,7 @@
 package acwing.每日一题.蓝桥每日一题;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -62,24 +64,68 @@ public class 砖块递推3777 {
         while( t -- > 0){
             int n = scanner.nextInt();
             String s = scanner.next();
-            int bcnt = 0;
-            int wcnt = 0;
-            for(int i = 0; i < n ; i ++){
-                char c = s.charAt(i);
-                if(c == 'W'){
-                    wcnt ++;
-                }else {
-                    bcnt ++;
+            char[] cc = s.toCharArray();
+            List<Integer> res = new ArrayList<>();
+            //变黑色
+            for(int i = 0; i < n - 1; i ++){
+                if('W' == cc[i]){
+                    res.add(i + 1);
+                    cc[i] = 'B';
+                    if(cc[i + 1] == 'B'){
+                        cc[i + 1 ] = 'W';
+                    }else {
+                        cc[i + 1] = 'B';
+                    }
                 }
             }
-            if(bcnt % 2 != 0 && wcnt % 2 != 0){
-                System.out.println(-1);
-            }else {
-
-
+            boolean isb = true;
+            for(char c: cc){
+                if(c == 'W'){
+                    isb = false;
+                    break;
+                }
             }
-        }
+            if(isb){
+                System.out.println(res.size());
+                for(int re : res){
+                    System.out.print(re + " ");
+                }
+                return;
+            }
+
+            List<Integer> res2 = new ArrayList<>();
+            char[] cc2 = s.toCharArray();
+            //变白色
+            for(int i = 0; i < n - 1; i ++){
+                if('B' == cc2[i]){
+                    res2.add(i + 1);
+                    cc[i] = 'W';
+                    if(cc2[i + 1] == 'B'){
+                        cc2[i + 1 ] = 'W';
+                    }else {
+                        cc2[i + 1] = 'B';
+                    }
+                }
+            }
+            boolean isw = true;
+            for(char c: cc2){
+                if(c == 'B'){
+                    isw = false;
+                    break;
+                }
+            }
+            if(isw){
+                System.out.println(res2.size());
+                for(int re : res2){
+                    System.out.print(re + " ");
+                }
+                return;
+            }
+            System.out.println( -1);
+            }
+
 
 
     }
 }
+

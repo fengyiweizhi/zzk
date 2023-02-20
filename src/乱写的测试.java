@@ -1,5 +1,6 @@
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @author 风亦未止
@@ -31,26 +32,46 @@ public class 乱写的测试 {
 //        c[r+1] -= num;
 //    }
 
-    //测试- 逆元
+    //    //测试- 逆元
+//    public static void main(String[] args) {
+//        int a = 20;
+//        int b = 4;
+//
+//        System.out.println((a / b ) % 3);
+//
+//        System.out.println( (a * qmi(b, 3 - 2, 3)) % 3);
+//    }
+//
+//
+//    private static int qmi(int i , int k , int p ){
+//        int res = 1;
+//        while(k > 0){
+//            if((k & 1) == 1){
+//                res = res * i % p;
+//            }
+//            i = i * i % p;
+//            k >>=1;
+//        }
+//        return res;
+//    }
     public static void main(String[] args) {
-        int a = 20;
-        int b = 4;
+        PriorityQueue<int[]> queue  = new PriorityQueue<int[]>((a, b) -> {return a[0] / a[1] - b[0] / b[1]; });
+        int[] r = new  int[]{1, 2};
+        int[] c = new int[]{ 3,5};
+        int[] d = new int[]{2,2};
+        queue.offer(r);
+        queue.offer(c);
+        queue.offer(d);
+        int a = 2;
 
-        System.out.println((a / b ) % 3);
-
-        System.out.println( (a * qmi(b, 3 - 2, 3)) % 3);
-    }
-
-
-    private static int qmi(int i , int k , int p ){
-        int res = 1;
-        while(k > 0){
-            if((k & 1) == 1){
-                res = res * i % p;
-            }
-            i = i * i % p;
-            k >>=1;
+        while(a -- > 0){
+            int[] poll = queue.poll();
+            poll[0] ++;
+            poll[1] ++;
+            queue.offer(poll);
         }
-        return res;
+        while(!queue.isEmpty()){
+            System.out.println(queue.poll()[0]);
+        }
     }
 }

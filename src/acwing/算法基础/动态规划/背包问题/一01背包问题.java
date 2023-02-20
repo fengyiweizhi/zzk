@@ -65,7 +65,7 @@ public class 一01背包问题 {
 //    }
 
 
-        public static void main(String[] args) {
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int n = scanner.nextInt();
         int v = scanner.nextInt();
@@ -76,13 +76,10 @@ public class 一01背包问题 {
             int w = scanner.nextInt();
             b[i] = new int[]{vv , w};
         }
-
         for(int i = 1; i <= n; i++){
             int[] bb = b[i];
-            for(int j = v ; j >= bb[1] ;j --){
-                if(j >= bb[0]){
-                    dp[j] =  Math.max(dp[j] ,dp[j - bb[0]] + bb[1] );
-                }
+            for(int j = v ; j >= bb[0] ;j --){
+                dp[j] =  Math.max(dp[j] ,dp[j - bb[0]] + bb[1] );
             }
         }
         System.out.println(dp[v]);
