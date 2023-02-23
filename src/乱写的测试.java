@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -54,24 +55,9 @@ public class 乱写的测试 {
 //        }
 //        return res;
 //    }
-    public static void main(String[] args) {
-        PriorityQueue<int[]> queue  = new PriorityQueue<int[]>((a, b) -> {return a[0] / a[1] - b[0] / b[1]; });
-        int[] r = new  int[]{1, 2};
-        int[] c = new int[]{ 3,5};
-        int[] d = new int[]{2,2};
-        queue.offer(r);
-        queue.offer(c);
-        queue.offer(d);
-        int a = 2;
-
-        while(a -- > 0){
-            int[] poll = queue.poll();
-            poll[0] ++;
-            poll[1] ++;
-            queue.offer(poll);
-        }
-        while(!queue.isEmpty()){
-            System.out.println(queue.poll()[0]);
-        }
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        String read = reader.readLine();
+        System.out.println(read);
     }
 }
