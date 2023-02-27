@@ -1,5 +1,7 @@
 package acwing.每日一题.蓝桥每日一题;
 
+import java.util.Scanner;
+
 /**
  * https://www.acwing.com/problem/content/143/
  *
@@ -58,8 +60,7 @@ package acwing.每日一题.蓝桥每日一题;
  */
 public class 周期Kmp141 {
     public static void main(String[] args) {
-
-
+        Scanner scanner = new Scanner(System.in);
 
 
     }

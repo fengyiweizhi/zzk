@@ -56,8 +56,11 @@ public class 乱写的测试 {
 //        return res;
 //    }
     public static void main(String[] args) throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        String read = reader.readLine();
-        System.out.println(read);
+        int[] nums = {1,23,4,5};
+        int[] res = Arrays.copyOf(nums ,nums.length);
+        res[1] = 1;
+        for(int i : nums ){
+            System.out.print(i + " ");
+        }
     }
 }

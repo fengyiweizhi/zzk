@@ -4,6 +4,8 @@ import java.io.*;
 import java.util.Scanner;
 
 /**
+ *
+ *
  * 或许你并不知道，你的某个朋友是你的亲戚。
  *
  * 他可能是你的曾祖父的外公的女婿的外甥女的表姐的孙子。
