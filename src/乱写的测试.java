@@ -56,11 +56,52 @@ public class 乱写的测试 {
 //        return res;
 //    }
     public static void main(String[] args) throws IOException {
-        int[] nums = {1,23,4,5};
-        int[] res = Arrays.copyOf(nums ,nums.length);
-        res[1] = 1;
-        for(int i : nums ){
-            System.out.print(i + " ");
+        factorize(90);
+    }
+    public static void printHollowDiamond(int n) {
+        if (n % 2 == 0) {
+            // 如果 n 是偶数，则将其加1，使得最中间的行有奇数个星号
+            n++;
+        }
+        // 打印上半部分菱形
+        for (int i = 1; i <= n / 2 + 1; i++) {
+            for (int j = 1; j <= n / 2 + 1 - i; j++) {
+                System.out.print(" ");
+            }
+            System.out.print("*");
+            for (int k = 1; k < 2 * (i - 1); k++) {
+                System.out.print(" ");
+            }
+            if (i != 1) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+        // 打印下半部分菱形
+        for (int i = n / 2; i >= 1; i--) {
+            for (int j = 1; j <= n / 2 + 1 - i; j++) {
+                System.out.print(" ");
+            }
+            System.out.print("*");
+            for (int k = 1; k < 2 * (i - 1); k++) {
+                System.out.print(" ");
+            }
+            if (i != 1) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+    }
+    public static void factorize(int n) {
+        System.out.print(n + "=");
+        for (int i = 2; i <= n; i++) {
+            while (n % i == 0) {
+                System.out.print(i);
+                n /= i;
+                if (n != 1) {
+                    System.out.print("*");
+                }
+            }
         }
     }
 }

@@ -1,5 +1,7 @@
 package acwing.算法基础.动态规划.线性DP;
 
+import java.util.Scanner;
+
 /**
  * https://www.acwing.com/problem/content/900/
  *
@@ -40,6 +42,19 @@ package acwing.算法基础.动态规划.线性DP;
  */
 public class 数字三角形 {
     public static void main(String[] args) {
-
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[][] nums = new int[n][n];
+        for(int i = 0 ; i < n ; i++){
+            for(int j = 0; j <= i; j ++){
+                nums[i][j] = scanner.nextInt();
+            }
+        }
+        for(int i = n - 2; i >= 0; i -- ){
+            for(int j = i; j >= 0; j--){
+                nums[i][j] = Math.max(nums[i + 1][j], nums[i + 1][j + 1] ) + nums[i][j];
+            }
+        }
+        System.out.println(nums[0][0]);
     }
 }
