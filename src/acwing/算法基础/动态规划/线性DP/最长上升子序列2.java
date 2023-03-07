@@ -35,19 +35,23 @@ public class 最长上升子序列2 {
         for(int i = 1; i <= n; i++){
             nums[i] = scanner.nextInt();
         }
-        int[] f = new int[n + 1];
+        int[] q = new int[n + 1];
+        int len = 0;
+        q[0] = (int) -2e9;
         for(int i = 1; i <= n ; i++ ){
-            f[i] = 1;
-            for(int j = 1; j <= i - 1; j ++){
-                if(nums[i] > nums [j]){
-                    f[i] = Math.max(f[i], f[j] + 1);
+            //找最长子序列中 最后一个数最小的
+            int l = 0, r = len;
+            while(l < r){
+                int mid = l + (r - l) / 2 ;
+                if(q[mid] < nums[i]){
+                    l = mid + 1;
+                }else {
+                    r = mid;
                 }
             }
+            len = Math.max(len, r + 1);
+            q[r + 1] = nums[i];
         }
-        int res = 0;
-        for(int r : f){
-            res = Math.max(r , res);
-        }
-        System.out.println(res);
+        System.out.println(len);
     }
 }

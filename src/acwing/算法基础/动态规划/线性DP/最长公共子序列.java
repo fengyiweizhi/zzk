@@ -39,18 +39,28 @@ public class 最长公共子序列 {
         int m = scanner.nextInt();
         String s1= scanner.next();
         String s2 = scanner.next();
+        char[] a = new char[n + 1];
+        for(int i = 1; i <= n ;i++){
+            a[i] = s1.charAt(i - 1);
+        }
+        char[] b = new char[m + 1];
+        for(int i = 1; i <= m; i ++){
+            b[i] = s2.charAt(i - 1);
+        }
         //这个集合表示： 所有由第一个序列的前i个字母中出现且在第二个序列前j个字母中出现的子序列
         //集合划分{
         // a[i]和b[j]是否在包含在子序列当中， 四种情况 - a[i] 在，b[j] 不在。 a[i] 在 b[i] 在 ...
         // 00， 01 ，10 ，11
 
-//        int[][] f = new int[][];
-
-
-
-
-
-
-
+        int[][] f = new int[n + 1][m + 1];
+        for(int i = 1; i <= n ; i++){
+            for(int j = 1; j <= m; j++){
+                f[i][j] = Math.max(f[i - 1][j] , f[i][j - 1]);
+                if(a[i] == b[j]){
+                    f[i][j] = Math.max(f[i][j], f[i - 1][j - 1] + 1);
+                }
+            }
+        }
+        System.out.println(f[n][m]);
     }
 }
