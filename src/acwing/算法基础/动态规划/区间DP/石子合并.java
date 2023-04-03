@@ -35,4 +35,11 @@ package acwing.算法基础.动态规划.区间DP;
  * @date 2023/3/7 21:00
  */
 public class 石子合并 {
+
+    public static void main(String[] args) {
+
+
+
+
+    }
 }

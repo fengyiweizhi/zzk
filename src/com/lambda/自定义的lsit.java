@@ -1,5 +1,7 @@
 package com.lambda;
 
+import com.lambda.自定义List.MyList;
+
 /**
  * @author 风亦未止
  * @date 2022/11/5 15:55
@@ -8,27 +10,56 @@ public class 自定义的lsit {
 
 
     public static void main(String[] args) {
-        MyList<Person> list=new MyList<>();
-        for (int i=0;i<5;i++){
-            Person person = new Person("zzk"+i,1+i);
-            list.add(person);
-        }
-        for (int i=0;i<list.size();i++){
+        MyList<Person> list = new MyList<>();
+        Person person1 = new Person("小明", 12);
+        list.add(person1);
+        Person person2 = new Person("小红", 14);
+        list.add(person2);
+        Person person3 = new Person("张三", 15);
+        list.add(person3);
+        Person person4 = new Person("老刘", 22);
+        list.add(person4);
+        for (int i = 0; i < list.size(); i++) {
             System.out.println(list.get(i).toString());
         }
-
-        //筛选zzk2的对象
-        MyList<Person> filter = list.filter(a -> {
-            return a.getName().contains("zzk2");
+        //筛选年龄大于13的对象
+        MyList<Person> filter1 = list.filter(a -> {
+            return a.getAge() > 13;
         });
-
-        System.out.println(filter.size());
-        for (int i=0;i<filter.size();i++){
-            System.out.println(filter.get(i).toString());
+        System.out.println("筛选年龄大于13的对象: ");
+        for (int i = 0; i < filter1.size(); i++) {
+            System.out.println(filter1.get(i).toString());
+        }
+        //筛选名字带“小”的对象
+        MyList<Person> filter2 = list.filter(a -> {
+            return a.getName().contains("小");
+        });
+        System.out.println("筛选名字带“小”的对象: ");
+        for (int i = 0; i < filter2.size(); i++) {
+            System.out.println(filter2.get(i).toString());
         }
 
+//       MyList<Integer> list =  new MyList<>(10);
+//       for(int i = 0; i <= 10; i ++){
+//           list.add(i);
+//       }
+//       for(int i = 0 ; i < list.size(); i ++){
+//           System.out.print(list.get(i) + ", ");
+//       }
+//        System.out.println();
+//        MyList<Integer> filter = list.filter((a) -> {
+//            return a % 2 == 0;
+//        });
+//        filter.removeByIndex(2);
+//        filter.add(111);
+//        for(int i = 0 ; i < filter.size(); i ++){
+//            System.out.print(filter.get(i) + ", ");
+//        }
+
+
     }
-    static class Person{
+
+    static class Person {
         private String name;
         private Integer age;
 
@@ -62,71 +93,4 @@ public class 自定义的lsit {
         }
     }
 
-    static class MyList<T> {
-        private T[] data;
-        private Integer size;
-
-        public MyList<T> filter(Myfilter<T> myfilter){
-            MyList<T> res=new MyList();
-            for (int i=0;i<size;i++){
-                if(myfilter.filter(data[i])){
-                    res.add(data[i]);
-                }
-            }
-            return res;
-        }
-
-        public MyList() {
-           this.data= (T[]) new Object[1];
-           this.size=0;
-        }
-
-        public T get(Integer num){
-            if(num>size)return null;
-            return data[num];
-        }
-
-        public boolean add(Object o) {
-            // 扩容
-            reSize(size);
-            size++;
-            data[size-1] = (T) o;
-            return true;
-        }
-
-        public boolean remove(Object index) {
-            Integer i= (Integer) index;
-            if(i>=size)return false;
-            for(int j=i+1;j<size;j++){
-                data[j-1]=data[j];
-            }
-            reSize(size--);
-            return true;
-        }
-
-        public void reSize(Integer size){
-            // 三种扩容方式
-            if(size+1 > data.length){
-                T[] temp = (T[])new Object[size*2];
-                for(int i = size-1,in = 0;i>=in;i--){
-                    temp[i] = data[i];
-                }
-                data = temp;
-            }
-            if(size<= data.length/4 && data.length/2!=0){
-                T[] temp = (T[])new Object[data.length/2];
-                for(int i = size-1,in = 0;i>=in;i--){
-                    temp[i] = data[i];
-                }
-                data = temp;
-            }
-        }
-        public int size(){
-            return size;
-        }
-    }
-
-    interface Myfilter<T>{
-        boolean filter(T obj);
-    }
 }
