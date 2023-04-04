@@ -1,5 +1,7 @@
 package acwing.算法基础.动态规划.区间DP;
 
+import java.util.Scanner;
+
 /**
  *设有 N 堆石子排成一排，其编号为 1,2,3,…,N。
  *
@@ -37,9 +39,35 @@ package acwing.算法基础.动态规划.区间DP;
 public class 石子合并 {
 
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] nums = new int[n];
+        //前缀和
+        int[] pre = new int[n + 1];
+        int sum = 0;
+        for(int i = 0; i < n ; i ++){
+            nums[i] = scanner.nextInt();
+            sum += nums[i];
+            pre[i + 1] = sum;
+        }
 
+        //集合表示： 【i， j】 合并成一对的集合，
+            // 属性: 代价的最小值
+        //中间分割 k ,
+        // f[i][j] = mim (f[i][k] + f[k + 1][j] + pre[j]  - pre[i]);
 
-
-
+        int[][] f = new int[n][n];
+        //长度为2 开始
+        for(int len = 2; len <= n ; len ++){
+            for(int i = 0; i + len - 1 < n ; i++){
+                    int j = i + len - 1;
+                    f[i][j] = (int)1e9;
+                    for(int k = i; k < j; k ++){
+                        f[i][j] = Math.min(f[i][j], f[i][k]  + f[k + 1][j] + pre[j + 1] - pre[i] );
+                    }
+//                System.out.println(f[i][j]);
+            }
+        }
+        System.out.print(f[0][n - 1]);
     }
 }
