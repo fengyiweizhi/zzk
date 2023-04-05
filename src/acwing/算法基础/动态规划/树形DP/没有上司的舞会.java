@@ -48,8 +48,59 @@ package acwing.算法基础.动态规划.树形DP;
  * @date 2023/4/5 13:36
  */
 public class 没有上司的舞会 {
-    public static void main(String[] args) {
+    private static int N = 60010;
+    private static int[] v = new int[N];
+    //邻接表
+    private static int[] h = new int[N];
+    private static int[] e = new int[N];
+    private static int[] ne = new int[N];
+    private static int idx = 0;
+    //f[i][0] 表示 所有以 i 为根的子树中, 且不选择i的集合
+    //属性 ： 最大值
+    private static int[][] f = new int[N][2];
+    private static int n;
+    //是否有父节点
+    private static boolean[] std = new boolean[N];
+    
+    //树形dp一下
+    private static void dfs(int r){
+        //初始化一下，假如选了
+        f[r][1] = v[r];
+        //枚举每个子节点
+        for(int i = h[r]; i != -1; i = ne[i]){
+            int t = e[i];
+            dfs(t);
+            //当前不选的情况，子节点可以选和不选
+            f[r][0] += Math.max(f[t][1], f[t][0]);
+            //当前选的情况，字节点只能不选；
+            f[r][1] += f[t][0];
+        }
+    }
 
 
+
+    private static void add(int a , int b){
+        e[idx] = b;
+        ne[idx] = h[a];
+        h[a] = idx++;
+    }
+    
+    public static void main(String[] args){
+        Arrays.fill(h, -1);
+        Scanner scanner = new Scanner(System.in);
+        n = scanner.nextInt();
+        for(int i = 1; i <= n ; i ++)v[i] = scanner.nextInt();
+        for(int i = 1; i < n ;i ++){
+            int a = scanner.nextInt();
+            int b = scanner.nextInt();
+            //后一个数是前一个数的父节点
+            add(b, a);
+            std[a] = true;
+        }
+        //求父节点
+        int root = 1; 
+        while(std[root]) root++;
+        dfs(root);
+        System.out.println(Math.max(f[root][0], f[root][1]));   
     }
 }
