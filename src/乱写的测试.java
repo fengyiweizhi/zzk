@@ -8,6 +8,7 @@ import java.util.stream.Stream;
  * @date 2023/1/4 15:55
  */
 public class 乱写的测试 {
+
     //测试的 差分
 //    public static void main(String[] args) {
 //        int[] nums = new int[]{1,12,3,4,1,4};
