@@ -1,5 +1,7 @@
 package acwing.算法基础.动态规划.数位统计DP;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -59,6 +61,68 @@ import java.util.Scanner;
 public class 计数问题 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-
+        while (true){
+            int a = scanner.nextInt();
+            int b = scanner.nextInt();
+            if(a == 0 && b ==0)break;
+            if(a > b) {
+                int t = a;
+                a = b ;
+                b = t;
+            }
+            //统计每个数字出现的次数
+            for(int i = 0; i < 10; i ++){
+                //[a , b] 区间内 i 的个数  = [1, b] 区间内1 的个数 - [1, a - 1] 区间内1 的个数
+                System.out.print(count(b , i) - count(a - 1, i) + " ");
+            }
+            System.out.println();
+        }
     }
+
+    //计算1 ~ n 中 x的个数
+    private static int count(int n, int x) {
+        if(n == 0) return 0;
+        //把n的每一位弄出来
+        List<Integer> num = new ArrayList<>();
+        while(n > 0){
+            num.add( n % 10);
+            n /= 10;
+        }
+        n = num.size();
+        int res = 0;
+        //求每一位上 x 的个数  aaabddd , 求 aaa 啥的 * 10的第i位次方 ,如果 x = 0 ，不从最高位开始算，如03324,是前导0
+        for(int i = n - 1 - (x == 0 ? 1 : 0); i >= 0; i -- ){
+            if(i < n - 1){
+                res += get(num, n - 1 , i + 1) * pow10(i);
+                //当x == 0时 aaaa0bbbb ,求第i位时减去 10的i次方，因为包括了前导 0的情况 ，减去 0bbb这种情况。
+                if(x == 0) res -= pow10(i);
+            }
+            if(num.get(i) == x){
+                res += get(num, i - 1, 0) + 1;
+            }else if(num.get(i) > x) {
+                res += pow10(i);
+            }
+        }
+        return res;
+    }
+
+
+    //获取第l 位到第 r位 组成的数字
+    public static int get(List<Integer> num , int l , int r){
+        int res = 0;
+        for(int i = l ; i >= r ; i--){
+            res = res * 10 +  num.get(i);
+        }
+        return res;
+    }
+
+    //求 10 的i次方
+    public static int pow10(int i){
+        int res = 1;
+        while(i -- > 0){
+            res *= 10;
+        }
+        return res;
+    }
+
 }
