@@ -1,5 +1,5 @@
 package acwing.算法基础.动态规划.记忆化搜索;
-
+import java.util.*;
 /**
  * https://www.acwing.com/problem/content/903/
  *给定一个 R 行 C 列的矩阵，表示一个矩形网格滑雪场。
@@ -53,10 +53,56 @@ package acwing.算法基础.动态规划.记忆化搜索;
  * @date 2023/4/5 13:37
  */
 public class 滑雪 {
-    public static void main(String[] args) {
+    final static int N = 301;
+    private static int n , m; 
+    //集合表示： 表示从i，j 点滑的下去的搜有路径的集合
+    //属性：最大值 
+    //状态计算： 从当前的i，j 上下左右走 ，假设网右走一个格子 f[i][j + 1]，当前的f[i][j] = f[i][j + 1] + 1 ,1为当前的格子;
+    private static int[][] f = new int[N][N];
+    private static int[][] h = new int[N][N];
 
+    //上下左右走
+    private static int[][] ne = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
 
-
-
+    private static int dp(int i , int j){
+        //如过算过了
+        if(f[i][j] != -1)return f[i][j];
+        //初始化 最小1；
+        f[i][j] = 1;
+        //遍历四个方向
+        for(int k = 0; k < 4; k++){
+            int x = ne[k][0] + i;
+            int y = ne[k][1] + j;
+            //在边界内
+            if(x >= 1 && x <= n && y >= 1 && y <= m && h[i][j] > h[x][y]){
+                f[i][j] = Math.max(f[i][j], dp(x, y) + 1);
+            }
+        }
+        return f[i][j];
     }
+
+
+    public static void main(String[] args){
+        Scanner scanner = new Scanner(System.in);
+        n = scanner.nextInt();
+        m = scanner.nextInt();
+        for(int i = 1; i <= n; i++){
+            for(int j = 1; j <= m; j++){
+                h[i][j] = scanner.nextInt();
+            }
+        }
+        //初始化f为-1 ，表示都没走过
+        for(int i = 1; i <= n; i++){
+            Arrays.fill(f[i], -1);
+        }
+        int res = 0;
+        //枚举每一个点找出最大的结果
+        for(int i = 1; i <= n; i++){
+            for(int j = 1; j <= m; j++){
+                res = Math.max(res, dp(i, j));
+            }   
+        }
+        System.out.println(res);
+    }
+
 }
