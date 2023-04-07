@@ -1,4 +1,4 @@
-// Created on iPad.
+package lanqiao.测评系统;// Created on iPad.
 
 /**
 问题描述
@@ -25,9 +25,7 @@
  */
 import java.util.Scanner;
 
-
-
-class B君的希望 {
+public class B君的希望 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int n = scanner.nextInt();
@@ -41,9 +39,9 @@ class B君的希望 {
         int res = 0;
         for(int i = 0; i < n; i ++){
             f[i] = 1;
-            for(int j = 0; j < i; j ++){
+            for(int j = 0; j <= i; j ++){
                 if(nums[i] > nums[j]){
-                    f[i] = f[j] + 1;
+                    f[i] = Math.max(f[i], f[j] + 1);
                 }
             }
             res = Math.max(res, f[i]);
