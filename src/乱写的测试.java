@@ -59,7 +59,8 @@ public class 乱写的测试 {
 
 
     public static void main(String[] args) throws IOException {
-        System.out.println(2 % (-2));
+        int random = new Random().nextInt();
+        System.out.println(random);
     }
 
 }
