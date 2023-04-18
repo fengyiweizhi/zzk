@@ -1,4 +1,4 @@
-package meituan;
+package 杂题.美团笔试;
 
 import java.util.Scanner;
 
