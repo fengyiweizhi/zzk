@@ -10,8 +10,8 @@ public class Main {
     public static void main(String[] args) {
         //查询地址是否一样
         GlobalObject globalObject = GlobalObject.getGlobalObject();
-        System.out.println(globalObject);
+        System.out.println(globalObject.getPassword());
         GlobalObject globalObject1 = GlobalObject.getGlobalObject();
-        System.out.println(globalObject1);
+        System.out.println(globalObject1.getUsername());
     }
 }

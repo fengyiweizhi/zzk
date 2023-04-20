@@ -1,31 +1,36 @@
 package acwing.算法基础.基础算法.排序;
 
+import java.util.Scanner;
+
 /**
- *
  * @author 风亦未止
  * @date 2022/8/21 16:14
  */
 public class 快速排序 {
     public static void main(String[] args) {
-        int[] nums = {1, 3, 5, 2, 4};
-
-        quckSort(nums, 0, nums.length-1);
-        for (int i = 0; i < nums.length; i++) {
-            System.out.print(nums[i] + " ");
+        Scanner s = new Scanner(System.in);
+        int n = s.nextInt();
+        int[] num = new int[n];
+        for (int i = 0; i < n; i++) {
+            num[i] = s.nextInt();
+        }
+        quckSort(num, 0, n - 1);
+        for (int i = 0; i < n; i++) {
+            System.out.print(num[i] + " ");
         }
     }
 
     public static void quckSort(int[] num, int l, int r) {
         if (l >= r) return;
-        int left = l , right = r;
-        int p = num[l]; //里面是啥都可以
+        int left = l - 1, right = r + 1;
+        int p = num[l];
         while (left < right) {
-            while(num[left]<p){
+            do {
                 left++;
-            }
-            while(num[right]>p){
+            } while (num[left] < p);
+            do {
                 right--;
-            }
+            } while (num[right] > p);
             if (left < right) {
                 int temp = num[left];
                 num[left] = num[right];
