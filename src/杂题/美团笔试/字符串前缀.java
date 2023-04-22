@@ -41,34 +41,7 @@ import java.util.Scanner;
 public class 字符串前缀 {
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int n = scanner.nextInt();
-        while(n -- > 0){
-            String s = scanner.next();
-            String t = scanner.next();
-            int slen = s.length();
-            int tlen = t.length();
-            if(tlen == 0){
-                System.out.println(slen);
-                return;
-            }
-            if(slen == 0){
-                System.out.println(0);
-                return;
-            }
-            int res = 0;
-            int i = 0;
-            int j = 0;
-            while(i < slen && j <= tlen){
-                 if(s.charAt(i) != t.charAt(j) ){
-                     res++;
-                 }
-                 i++;
-                 j++;
-            }
-//            System.out.println(res);
-            res += (j < slen ? (slen - j) : 0);
-            System.out.println(res);
-        }
+
+
     }
 }
