@@ -32,11 +32,13 @@ public class 最长连续不重复子序列 {
         for(int i=0;i<n;i++){
             nums[i]=scanner.nextInt();
         }
+        //子数组嘛就是
         int[] cheak=new int[100010];
         int ans=0;
         for(int i=0,j=0;i<n;i++){
             cheak[nums[i]]++;
             while(cheak[nums[i]]>1){
+                // i 在前面 ，如果遇到相同的了， j 向后移动跟上，
                 cheak[nums[j]]--;
                 j++;
             }
